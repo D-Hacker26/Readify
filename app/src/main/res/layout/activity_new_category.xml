@@ -23,30 +23,36 @@
         android:text="Add new category"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="30dp"
+
         android:textColor="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="28dp"
+        android:layout_margin="10dp"
         android:background="#1F1F23"
         android:hint="Category Title"
+        android:textColor="#505760"
         android:textColorHint="#505760"
         android:paddingStart="10dp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
-
+        android:layout_margin="10dp"
         android:background="@color/purple"
         android:text="Submit"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16dp"/>
 
-
+    </LinearLayout>
 </LinearLayout>

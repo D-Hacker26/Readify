@@ -20,53 +20,69 @@
         android:layout_marginStart="40dp"
         android:layout_marginBottom="28dp"
         android:textColor="@color/white"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="28dp"
-        android:background="#1F1F23"
-        android:hint="Full name"
+        android:layout_margin="10dp"
+
+        android:drawableStart="@drawable/baseline_person_24"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/full_name"
         android:textColorHint="#505760"
-        android:paddingStart="10dp"
+        android:textColor="#505760"
+        android:padding="10dp"
         />
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="28dp"
-        android:background="#1F1F23"
-        android:hint="abc@gmail.com"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/email_24"
+        android:hint="@string/abc_gmail_com"
         android:textColorHint="#505760"
-        android:paddingStart="10dp"
+        android:textColor="#505760"
+        android:padding="10dp"
         />
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="28dp"
-        android:background="#1F1F23"
-        android:hint="Your Password"
+        android:layout_margin="10dp"
+        android:drawableStart="@drawable/baseline_lock_24"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/your_password1"
         android:textColorHint="#505760"
-        android:paddingStart="10dp"
+        android:textColor="#505760"
+        android:padding="10dp"
         />
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:layout_marginBottom="28dp"
-        android:background="#1F1F23"
+        android:textColor="#505760"
+        android:background="@drawable/rounded_edittext"
         android:hint="Confirm Password"
         android:textColorHint="#505760"
-        android:paddingStart="10dp"
+        android:padding="10dp"
         />
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
         android:background="@color/purple"
         android:text="SIGN UP"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16dp"/>
@@ -79,14 +95,18 @@
         android:layout_gravity="center"
         android:textSize="20dp"/>
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="288dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@drawable/goole_logo"
         android:background="#1F1F23"
         android:text="Login with Google"
         android:textColor="#505760"
         android:textStyle="normal"
         android:textSize="16dp"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,13 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Readify</string>
-    <string name="sighin">SighIn</string>
     <string name="signin">SignIn</string>
     <string name="abc_email_com">abc@email.com</string>
     <string name="your_password">Your Password</string>
     <string name="sign_in">SIGN IN</string>
     <string name="or">OR</string>
     <string name="login_with_google">Login with Google</string>
-    <string name="full_name">Full name</string>
     <string name="abc_gmail_com">abc@gmail.com</string>
     <string name="your_password1">Your Password</string>
 </resources>
