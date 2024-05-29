@@ -20,7 +20,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new category"
+        android:text="@string/add_new_category"
         android:textSize="32sp"
         android:textStyle="bold"
         android:layout_marginStart="30dp"
@@ -37,11 +37,11 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="#1F1F23"
-        android:hint="Category Title"
+        android:hint="@string/category_title"
         android:textColor="#505760"
         android:textColorHint="#505760"
         android:paddingStart="10dp"
-        />
+        tools:ignore="RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
@@ -49,10 +49,10 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="@color/purple"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="16dp"/>
+        android:textSize="16sp"/>
 
     </LinearLayout>
 </LinearLayout>

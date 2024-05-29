@@ -13,7 +13,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sighup"
+        android:text="@string/sighup"
         android:textSize="32sp"
         android:textStyle="bold"
         android:layout_marginTop="40dp"
@@ -70,7 +70,7 @@
         android:layout_marginBottom="28dp"
         android:textColor="#505760"
         android:background="@drawable/rounded_edittext"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         android:textColorHint="#505760"
         android:padding="10dp"
         />
@@ -80,12 +80,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
         android:background="@color/purple"
-        android:text="SIGN UP"
+        android:text="@string/sign_up"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="16dp"/>
+        android:textSize="16sp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
         android:layout_marginTop="28dp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -106,7 +106,7 @@
         android:text="Login with Google"
         android:textColor="#505760"
         android:textStyle="normal"
-        android:textSize="16dp"/>
+        android:textSize="16sp"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -13,7 +13,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new Book"
+        android:text="@string/add_new_book"
         android:layout_marginTop="52dp"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="#1F1F23"
-            android:hint="Book Title"
+            android:hint="@string/book_title"
             android:textColor="#505760"
             android:textColorHint="#505760"
             android:paddingStart="10dp"
@@ -43,21 +43,21 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="#1F1F23"
-            android:hint="Book Description"
+            android:hint="@string/book_description"
             android:textColor="#505760"
             android:textColorHint="#505760"
             android:paddingStart="10dp"
-            />
+            tools:ignore="RtlSymmetry" />
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="@color/purple"
-            android:text="Upload"
+            android:text="@string/upload"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="16dp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 </LinearLayout>
