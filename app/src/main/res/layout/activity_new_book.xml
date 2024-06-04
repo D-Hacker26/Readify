@@ -54,6 +54,28 @@
             android:textColorHint="#505760"
             android:paddingStart="10dp"
             tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1F1F23"
+            android:layout_margin="10dp"
+            >
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/arrow_down_24"
+                android:layout_gravity="center"
+                />
+        <Spinner
+            android:id="@+id/my_spinner"
+            android:padding="10dp"
+            android:background="#1F1F23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="42dp"

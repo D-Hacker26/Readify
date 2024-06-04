@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Readify"
         tools:targetApi="31">
         <activity
+            android:name=".ListItem"
+            android:exported="false" />
+        <activity
             android:name=".home"
             android:exported="false" />
         <activity
@@ -22,10 +25,10 @@
             android:name=".Profile"
             android:exported="false" />
         <activity
-            android:name=".new_book"
+            android:name=".NewBook"
             android:exported="false" />
         <activity
-            android:name=".new_category"
+            android:name=".NewCategory"
             android:exported="false" />
         <activity
             android:name=".Forgot_password"
