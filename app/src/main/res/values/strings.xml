@@ -22,7 +22,7 @@
     <string name="sumbit">SUMBIT</string>
     <string name="sign_up">SIGN UP</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="sighup">Sighup</string>
+    <string name="sighup">Sign Up</string>
     <string name="profile">PROFILE</string>
     <string-array name="my_spinner_array">
         <item>Option 1</item>

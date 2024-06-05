@@ -55,7 +55,6 @@
         android:layout_marginTop="50dp"
         android:layout_weight="10"
         android:gravity="bottom"
-
         android:orientation="vertical">
 
         <ImageView

@@ -3,7 +3,7 @@ package com.example.readify
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class signin : AppCompatActivity() {
+class Signin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)

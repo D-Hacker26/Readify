@@ -3,9 +3,9 @@ package com.example.readify
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class book_details : AppCompatActivity() {
+class Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_book_details)
+        setContentView(R.layout.activity_splashs1)
     }
 }
