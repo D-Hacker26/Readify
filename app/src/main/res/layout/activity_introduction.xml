@@ -18,6 +18,7 @@
         android:textSize="20sp" />
 
         <Button
+            android:id="@+id/btn_get_started"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text2"
@@ -25,7 +26,8 @@
             android:layout_marginBottom="80dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:text="Get Started" />
+            android:text="Get Started"
+            />
 
     </RelativeLayout>
     

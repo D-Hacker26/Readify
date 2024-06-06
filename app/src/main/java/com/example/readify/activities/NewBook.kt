@@ -1,9 +1,10 @@
-package com.example.readify
+package com.example.readify.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.example.readify.R
 
 class NewBook : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

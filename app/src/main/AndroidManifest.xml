@@ -13,40 +13,40 @@
         android:theme="@style/Theme.Readify"
         tools:targetApi="31">
         <activity
-            android:name=".Home2"
+            android:name=".activities.Home2"
             android:exported="false" />
         <activity
-            android:name=".ListItem"
+            android:name=".activities.ListItem"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".activities.Home"
             android:exported="false" />
         <activity
-            android:name=".BookDetails"
+            android:name=".activities.BookDetails"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".activities.Profile"
             android:exported="false" />
         <activity
-            android:name=".NewBook"
+            android:name=".activities.NewBook"
             android:exported="false" />
         <activity
-            android:name=".NewCategory"
+            android:name=".activities.NewCategory"
             android:exported="false" />
         <activity
-            android:name=".ForgotPassword"
+            android:name=".activities.ForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".Signup"
+            android:name=".activities.Signup"
             android:exported="false" />
         <activity
-            android:name=".Signin"
+            android:name=".activities.Signin"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name=".activities.IntroductionActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

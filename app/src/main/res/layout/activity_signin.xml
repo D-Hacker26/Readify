@@ -31,6 +31,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -43,6 +44,7 @@
             android:textColor="#505760" />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -62,7 +64,7 @@
 
 
             <ToggleButton
-                android:id="@+id/toggleButton1"
+                android:id="@+id/toggle_button_remember_me"
                 android:layout_width="36dp"
                 android:layout_height="24dp"
                 android:background="@drawable/toggle_selector"
@@ -73,11 +75,12 @@
                 android:layout_height="wrap_content"
                 android:text="  Remember Me "
                 android:layout_weight="50"
-                 android:layout_toEndOf="@+id/toggleButton1"
+                 android:layout_toEndOf="@+id/toggle_button_remember_me"
                 android:textColor="@color/white"
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/txt_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -87,6 +90,7 @@
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_in"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -124,7 +128,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/edit_location_text_view"
+                android:id="@+id/btn_login_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -153,6 +157,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/txt_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
