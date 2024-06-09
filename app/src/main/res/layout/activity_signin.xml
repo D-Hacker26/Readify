@@ -5,23 +5,33 @@
     android:background="@color/b"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/readlogo" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:src="@drawable/readlogo" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="28dp"
-        android:text="@string/signin"
-        android:textColor="@color/white"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="28dp"
+                android:text="@string/signin"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -166,4 +176,6 @@
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

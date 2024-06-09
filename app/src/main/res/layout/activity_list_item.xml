@@ -29,6 +29,7 @@
                 android:gravity="center">
 
                <ImageView
+                   android:id="@+id/img_list"
                    android:layout_width="100dp"
                    android:layout_height="100dp"
                    android:src="@drawable/goole_logo"/>
@@ -48,6 +49,7 @@
                     android:layout_height="wrap_content"
                     >
                     <TextView
+                        android:id="@+id/txt_list_head"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="MATHS"
@@ -56,6 +58,7 @@
                         android:textSize="20sp"
                         />
                     <TextView
+                        android:id="@+id/txt_list_subhead"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Timetable"
@@ -76,6 +79,7 @@
                         android:layout_height="wrap_content"
                         >
                         <TextView
+                            android:id="@+id/txt_list_size"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1000KB"
@@ -90,6 +94,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:id="@+id/txt_list_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="04/06/24"
@@ -104,6 +109,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:id="@+id/txt_list_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="BTECH"

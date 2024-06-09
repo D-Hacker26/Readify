@@ -1,8 +1,10 @@
 package com.example.readify.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import com.example.readify.R
 
@@ -21,6 +23,13 @@ class NewBook : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             spinner.adapter = adapter
+        }
+
+        val buttonBack: Button = findViewById(R.id.btn_back)
+        buttonBack.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

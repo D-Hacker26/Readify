@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/b"
@@ -19,11 +17,13 @@
         android:layout_marginStart="40dp"
         android:layout_marginBottom="28dp"
         android:textColor="@color/white"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:orientation="vertical">
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_full_name"
         android:layout_width="match_parent"
@@ -50,6 +50,7 @@
         android:textColor="#505760"
         android:padding="10dp"
         />
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"

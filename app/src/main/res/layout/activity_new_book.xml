@@ -11,6 +11,7 @@
     >
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_back"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -32,6 +33,7 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_book_title"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -44,6 +46,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_book_description"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -77,6 +80,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_upload"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"

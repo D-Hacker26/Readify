@@ -20,7 +20,7 @@ class Signup : AppCompatActivity() {
         }
         val textViewSignIn: TextView = findViewById(R.id.txt_sign_in)
         textViewSignIn.setOnClickListener {
-            val intent = Intent(this, Signup::class.java)
+            val intent = Intent(this, Signin::class.java)
             startActivity(intent)
         }
     }
