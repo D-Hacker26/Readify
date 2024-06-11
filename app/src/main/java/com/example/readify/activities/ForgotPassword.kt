@@ -17,5 +17,12 @@ class ForgotPassword : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        val buttonBack: Button = findViewById(R.id.btn_back)
+        buttonBack.setOnClickListener {
+            val intent = Intent(this, Signin::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

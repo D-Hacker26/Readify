@@ -1,10 +1,11 @@
 package com.example.readify.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.readify.R
 
 class Signin : AppCompatActivity() {
@@ -12,7 +13,10 @@ class Signin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
 
+
         val textViewForgotPassword: TextView = findViewById(R.id.txt_forgot_password)
+        val editTextEmail: EditText = findViewById(R.id.et_email)
+        val editTextPassword: EditText = findViewById(R.id.et_password)
         textViewForgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)

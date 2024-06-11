@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import com.example.readify.R
 
@@ -24,6 +25,10 @@ class NewBook : AppCompatActivity() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+
+        val editTextBookTitle: EditText = findViewById(R.id.et_book_title)
+        val editTextBookDescription: EditText = findViewById(R.id.et_book_description)
+        val buttonUpload: Button = findViewById(R.id.btn_upload)
 
         val buttonBack: Button = findViewById(R.id.btn_back)
         buttonBack.setOnClickListener {

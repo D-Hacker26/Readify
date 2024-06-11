@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27940962271",
+    "project_id": "readify-98f7b",
+    "storage_bucket": "readify-98f7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27940962271:android:9a267ae59f8b9b418b8e6a",
+        "android_client_info": {
+          "package_name": "com.shailsoft.readify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27940962271-dfjq63k1ceh2b6s4ntoii5pptar1feir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsieHymXC6o-ry-AAqUZzynAFaqELr_RY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27940962271-dfjq63k1ceh2b6s4ntoii5pptar1feir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
