@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.readify.R
 import com.example.readify.extensions.Extensions.toast
 import com.example.readify.utils.FirebaseUtils.firebaseAuth
+import com.example.readify.utils.FirebaseUtils.firebaseUser
 import com.google.firebase.auth.FirebaseUser
 
 class Signup : AppCompatActivity() {
@@ -36,9 +37,7 @@ class Signup : AppCompatActivity() {
 
 
         buttonSignUp.setOnClickListener {
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
+            signIn()
         }
         val textViewSignIn: TextView = findViewById(R.id.txt_sign_in)
         textViewSignIn.setOnClickListener {
@@ -59,7 +58,7 @@ class Signup : AppCompatActivity() {
 
     private fun notEmpty(): Boolean = editTextEmail.text.toString().trim().isNotEmpty() &&
             editTextPassword.text.toString().trim().isNotEmpty() &&
-            editTextConfirmPassword.text.toString().trim().isNotEmpty() 
+            editTextConfirmPassword.text.toString().trim().isNotEmpty() && editTextFullName.text.toString().trim().isNotEmpty()
 
     private fun identicalPassword(): Boolean {
         var identical = false
@@ -79,4 +78,40 @@ class Signup : AppCompatActivity() {
         return identical
     }
 
+    private fun signIn() {
+        if (identicalPassword()) {
+            // identicalPassword() returns true only  when inputs are not empty and passwords are identical
+            userEmail = editTextEmail.text.toString().trim()
+            userPassword = editTextPassword.text.toString().trim()
+
+            /*create a user*/
+            firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        toast("created account successfully !")
+                        sendEmailVerification()
+                        startActivity(Intent(this, Home::class.java))
+                        finish()
+                    } else {
+                        toast("failed to Authenticate !")
+                    }
+                }
+        }
+    }
+
+    /* send verification email to the new user. This will only
+    *  work if the firebase user is not null.
+    */
+
+    private fun sendEmailVerification() {
+        firebaseUser?.let {
+            it.sendEmailVerification().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    toast("email sent to $userEmail")
+                }
+            }
+        }
+    }
 }
+
+
