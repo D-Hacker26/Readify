@@ -4,21 +4,26 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import com.example.readify.R
 
 class ForgotPassword : AppCompatActivity() {
+    lateinit var editTextEmail: AppCompatEditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        editTextEmail = findViewById(R.id.et_email)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
 
-        val buttonSubmit: Button = findViewById(R.id.btn_submit)
+        val buttonSubmit: AppCompatButton = findViewById(R.id.btn_submit)
         buttonSubmit.setOnClickListener {
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
+
         }
 
-        val buttonBack: Button = findViewById(R.id.btn_back)
+        val buttonBack: AppCompatButton = findViewById(R.id.btn_back)
         buttonBack.setOnClickListener {
             val intent = Intent(this, Signin::class.java)
             startActivity(intent)
