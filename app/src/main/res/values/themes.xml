@@ -3,7 +3,7 @@
 <!--
     <style name="Base.Theme.Readify" parent="Theme.Material3.Light.NoActionBar">
 -->
-    <style name="Base.Theme.Readify" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Base.Theme.Readify" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:background">#00000000</item>
         <item name="android:windowBackground">#00000000</item>
         <item name="android:windowSwipeToDismiss">false</item>

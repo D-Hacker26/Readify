@@ -28,7 +28,7 @@
             android:name=".activities.Profile"
             android:exported="false" />
         <activity
-            android:name=".activities.NewBook"
+            android:name=".activities.AddNewBook"
             android:exported="false" />
         <activity
             android:name=".activities.NewCategory"

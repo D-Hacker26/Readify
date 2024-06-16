@@ -28,7 +28,7 @@ class Home : AppCompatActivity() {
 
         val buttonAddBook: Button = findViewById(R.id.btn_add_book)
         buttonAddBook.setOnClickListener {
-            val intent = Intent(this, NewBook::class.java)
+            val intent = Intent(this, AddNewBook::class.java)
             startActivity(intent)
             finish()
         }
