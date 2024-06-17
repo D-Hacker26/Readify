@@ -14,6 +14,10 @@ class AddNewBook : AppCompatActivity() {
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+    private lateinit var spinner: Spinner
+    private lateinit var editTextBookTitle: AppCompatEditText
+    private lateinit var editTextBookDescription: AppCompatEditText
+    private lateinit var buttonUpload: AppCompatButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_book)
@@ -21,9 +25,18 @@ class AddNewBook : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
+        editTextBookTitle = findViewById(R.id.et_book_title)
+        editTextBookDescription = findViewById(R.id.et_book_description)
+        buttonUpload = findViewById(R.id.btn_upload)
+        spinner = findViewById(R.id.my_spinner)
+        val buttonBack: AppCompatButton = findViewById(R.id.btn_back)
+
         fetchCategories()
 
-        val spinner: Spinner = findViewById(R.id.my_spinner)
+        buttonUpload.setOnClickListener {
+            uploadBook()
+        }
+
         ArrayAdapter.createFromResource(
             this,
             R.array.my_spinner_array,
@@ -35,16 +48,51 @@ class AddNewBook : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
-        val editTextBookTitle: AppCompatEditText = findViewById(R.id.et_book_title)
-        val editTextBookDescription: AppCompatEditText = findViewById(R.id.et_book_description)
-        val buttonUpload: AppCompatButton = findViewById(R.id.btn_upload)
 
-        val buttonBack: AppCompatButton = findViewById(R.id.btn_back)
         buttonBack.setOnClickListener {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun uploadBook() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            val bookTitle = editTextBookTitle.text.toString().trim()
+            val bookDescription = editTextBookDescription.text.toString().trim()
+            val selectedCategory = spinner.selectedItem.toString()
+
+            if (bookTitle.isNotEmpty() && bookDescription.isNotEmpty() && selectedCategory.isNotEmpty()) {
+                val bookData = hashMapOf(
+                    "title" to bookTitle,
+                    "description" to bookDescription,
+                    "category" to selectedCategory,
+                    "userId" to userId
+                )
+
+                firestore.collection("books")
+                    .add(bookData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Book uploaded successfully", Toast.LENGTH_LONG).show()
+                        clearFields()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to upload book: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            } else {
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun clearFields() {
+        editTextBookTitle.text?.clear()
+        editTextBookDescription.text?.clear()
+        spinner.setSelection(0)
     }
 
     private fun fetchCategories() {
@@ -65,7 +113,11 @@ class AddNewBook : AppCompatActivity() {
                     setUpSpinner(categories)
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Failed to fetch categories: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Failed to fetch categories: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_LONG).show()
