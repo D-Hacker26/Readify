@@ -9,7 +9,7 @@ import com.example.readify.R
 class ListItem : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_item)
+        setContentView(R.layout.list_item)
 
         val imageViewList: ImageView = findViewById(R.id.img_list)
         val textViewListHead: TextView = findViewById(R.id.txt_list_head)

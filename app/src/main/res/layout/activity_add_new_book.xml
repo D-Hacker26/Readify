@@ -60,20 +60,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#1F1F23"
-            android:layout_margin="10dp"
-            >
+            android:layout_margin="10dp">
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/arrow_down_24"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
         <Spinner
             android:id="@+id/my_spinner"
             android:padding="10dp"
             android:background="#1F1F23"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1F1F23"
+            android:layout_margin="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_uploaded_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/goole_logo"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:text="Uploade file will be shown here"
+            android:layout_margin="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_browse_file"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Browse File"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:background="@color/purple"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
 
         </LinearLayout>
 

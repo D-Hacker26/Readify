@@ -1,14 +1,22 @@
 package com.example.readify.activities
 
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import com.example.readify.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddNewBook : AppCompatActivity() {
 
@@ -16,8 +24,15 @@ class AddNewBook : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var spinner: Spinner
     private lateinit var editTextBookTitle: AppCompatEditText
+    private lateinit var textViewUploadedFile: AppCompatTextView
+    private lateinit var buttonBrowseFile: AppCompatButton
     private lateinit var editTextBookDescription: AppCompatEditText
     private lateinit var buttonUpload: AppCompatButton
+
+    companion object {
+        private const val REQUEST_CODE_SELECT_PDF = 1001
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_book)
@@ -28,13 +43,21 @@ class AddNewBook : AppCompatActivity() {
         editTextBookTitle = findViewById(R.id.et_book_title)
         editTextBookDescription = findViewById(R.id.et_book_description)
         buttonUpload = findViewById(R.id.btn_upload)
+        textViewUploadedFile = findViewById(R.id.tv_uploaded_file)
+        buttonBrowseFile = findViewById(R.id.btn_browse_file)
         spinner = findViewById(R.id.my_spinner)
         val buttonBack: AppCompatButton = findViewById(R.id.btn_back)
 
         fetchCategories()
 
-        buttonUpload.setOnClickListener {
-            uploadBook()
+//        buttonUpload.setOnClickListener {
+//            val fileUrl = textViewUploadedFile.text.toString()
+//         //   uploadBook(fileUrl)
+//        }
+        buttonBrowseFile.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "application/pdf"
+            startActivityForResult(intent, REQUEST_CODE_SELECT_PDF)
         }
 
         ArrayAdapter.createFromResource(
@@ -42,12 +65,9 @@ class AddNewBook : AppCompatActivity() {
             R.array.my_spinner_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
-
 
         buttonBack.setOnClickListener {
             val intent = Intent(this, Home::class.java)
@@ -56,7 +76,50 @@ class AddNewBook : AppCompatActivity() {
         }
     }
 
-    private fun uploadBook() {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_SELECT_PDF && resultCode == RESULT_OK) {
+            data?.data?.let { uri ->
+                val fileSize = uri.getFileSize(contentResolver)
+                Log.d("FileSize", "File size fetched: $fileSize bytes")  // Detailed log for file size
+                val currentDate = SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(Date())
+                Log.d("CurrentDate", "Current date fetched: $currentDate")  // Detailed log for date
+                uploadFileToFirebase(uri, fileSize, currentDate)
+            }
+        }
+    }
+
+
+
+
+    private fun uploadFileToFirebase(fileUri: Uri, fileSize: Long, uploadDate: String) {
+        val storageReference = FirebaseStorage.getInstance().reference
+        val fileReference = storageReference.child("uploads/${System.currentTimeMillis()}.pdf")
+
+        fileReference.putFile(fileUri)
+            .addOnSuccessListener {
+                fileReference.downloadUrl.addOnSuccessListener { uri ->
+                    textViewUploadedFile.text = uri.toString()
+                    uploadBook(uri.toString(), fileSize, uploadDate)
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to upload file: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
+    private fun Uri.getFileSize(contentResolver: ContentResolver): Long {
+        return try {
+            contentResolver.openFileDescriptor(this, "r")?.use {
+                it.statSize
+            } ?: 0L
+        } catch (e: Exception) {
+            Log.e("FileSizeError", "Error fetching file size: ${e.message}")
+            0L
+        }
+    }
+
+    private fun uploadBook(fileUrl: String, fileSize: Long, uploadDate: String) {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
@@ -64,13 +127,18 @@ class AddNewBook : AppCompatActivity() {
             val bookDescription = editTextBookDescription.text.toString().trim()
             val selectedCategory = spinner.selectedItem.toString()
 
-            if (bookTitle.isNotEmpty() && bookDescription.isNotEmpty() && selectedCategory.isNotEmpty()) {
+            if (bookTitle.isNotEmpty() && bookDescription.isNotEmpty() && selectedCategory.isNotEmpty() && fileUrl.isNotEmpty()) {
                 val bookData = hashMapOf(
                     "title" to bookTitle,
                     "description" to bookDescription,
                     "category" to selectedCategory,
-                    "userId" to userId
+                    "userId" to userId,
+                    "fileUrl" to fileUrl,
+                    "fileSize" to fileSize,
+                    "uploadDate" to uploadDate
                 )
+
+                Log.d("BookUpload", "Uploading book with data: $bookData")
 
                 firestore.collection("books")
                     .add(bookData)
@@ -89,10 +157,16 @@ class AddNewBook : AppCompatActivity() {
         }
     }
 
+
+
+
+
+
     private fun clearFields() {
         editTextBookTitle.text?.clear()
         editTextBookDescription.text?.clear()
         spinner.setSelection(0)
+        textViewUploadedFile.text = ""
     }
 
     private fun fetchCategories() {

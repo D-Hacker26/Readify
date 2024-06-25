@@ -50,6 +50,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
+        android:visibility="gone"
         android:layout_below="@+id/toolbar"
         android:layout_above="@+id/rel_lay"
         android:orientation="vertical">
@@ -68,6 +69,14 @@
             android:textSize="20dp" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/rel_lay"
+        android:layout_margin="2dp"/>
 
     <RelativeLayout
         android:id="@+id/rel_lay"
