@@ -15,13 +15,14 @@ import com.example.readify.data.Book
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class Home : AppCompatActivity() {
+class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
 
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
     private lateinit var bookAdapter: BookAdapter
     private val bookList = mutableListOf<Book>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -29,9 +30,8 @@ class Home : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         recyclerView = findViewById(R.id.recycler_view_books)
-      //  bookList = mutableListOf()
 
-        bookAdapter = BookAdapter(bookList)
+        bookAdapter = BookAdapter(bookList, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = bookAdapter
 
@@ -67,10 +67,10 @@ class Home : AppCompatActivity() {
                 .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener { documents ->
-                    bookList.clear()  // Clear the list to avoid duplicates
+                    bookList.clear()
                     for (document in documents) {
                         val book = document.toObject(Book::class.java)
-                        Log.d("BookFetched", "Fetched book: $book")  // Detailed log for each book
+                        Log.d("BookFetched", "Fetched book: $book")
                         bookList.add(book)
                     }
                     bookAdapter.notifyDataSetChanged()
@@ -83,6 +83,9 @@ class Home : AppCompatActivity() {
         }
     }
 
-
-
+    override fun onItemClick(book: Book) {
+        val intent = Intent(this, BookDetails::class.java)
+        intent.putExtra("book", book)
+        startActivity(intent)
+    }
 }

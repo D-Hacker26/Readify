@@ -12,7 +12,14 @@ import com.bumptech.glide.Glide
 import com.example.readify.R
 import com.example.readify.data.Book
 
-class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter(
+    private val books: List<Book>,
+    private val itemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(book: Book)
+    }
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.txt_list_head)
@@ -21,6 +28,10 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
         val date: TextView = itemView.findViewById(R.id.txt_list_date)
         val category: TextView = itemView.findViewById(R.id.txt_list_category)
         val thumbnail: ImageView = itemView.findViewById(R.id.img_list)
+
+        fun bind(book: Book, clickListener: OnItemClickListener) {
+            itemView.setOnClickListener { clickListener.onItemClick(book) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
@@ -44,10 +55,9 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
             .load(book.thumbnailUrl)
             .placeholder(R.drawable.goole_logo)  // Add a placeholder image
             .into(holder.thumbnail)
+
+        holder.bind(book, itemClickListener)
     }
-
-
-
 
     override fun getItemCount() = books.size
 }

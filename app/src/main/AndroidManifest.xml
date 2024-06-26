@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Readify"
         tools:targetApi="31">
         <activity
+            android:name=".activities.BookDetailsItem"
+            android:exported="false" />
+        <activity
             android:name=".activities.Home2"
             android:exported="false" />
         <activity
