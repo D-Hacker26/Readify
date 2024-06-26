@@ -2,6 +2,8 @@ package com.example.readify.activities
 
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -81,7 +84,10 @@ class AddNewBook : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_SELECT_PDF && resultCode == RESULT_OK) {
             data?.data?.let { uri ->
                 val fileSize = uri.getFileSize(contentResolver)
-                Log.d("FileSize", "File size fetched: $fileSize bytes")  // Detailed log for file size
+                Log.d(
+                    "FileSize",
+                    "File size fetched: $fileSize bytes"
+                )  // Detailed log for file size
                 val currentDate = SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(Date())
                 Log.d("CurrentDate", "Current date fetched: $currentDate")  // Detailed log for date
                 uploadFileToFirebase(uri, fileSize, currentDate)
@@ -90,8 +96,7 @@ class AddNewBook : AppCompatActivity() {
     }
 
 
-
-
+    // Upload PDF file to Firebase Storage and generate/upload thumbnail
     private fun uploadFileToFirebase(fileUri: Uri, fileSize: Long, uploadDate: String) {
         val storageReference = FirebaseStorage.getInstance().reference
         val fileReference = storageReference.child("uploads/${System.currentTimeMillis()}.pdf")
@@ -99,14 +104,70 @@ class AddNewBook : AppCompatActivity() {
         fileReference.putFile(fileUri)
             .addOnSuccessListener {
                 fileReference.downloadUrl.addOnSuccessListener { uri ->
-                    textViewUploadedFile.text = uri.toString()
-                    uploadBook(uri.toString(), fileSize, uploadDate)
+                    val thumbnailUri = generateThumbnail(fileUri)
+                    if (thumbnailUri != null) {
+                        uploadThumbnailToFirebase(thumbnailUri) { thumbnailUrl ->
+                            textViewUploadedFile.text = uri.toString()
+                            uploadBook(uri.toString(), fileSize, uploadDate, thumbnailUrl)
+                        }
+                    } else {
+                        uploadBook(uri.toString(), fileSize, uploadDate, "")
+                    }
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to upload file: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Failed to upload file: ${e.message}", Toast.LENGTH_LONG)
+                    .show()
             }
     }
+
+    // Upload thumbnail to Firebase Storage
+    private fun uploadThumbnailToFirebase(thumbnailUri: Uri, onComplete: (String) -> Unit) {
+        val storageReference = FirebaseStorage.getInstance().reference
+        val thumbnailReference =
+            storageReference.child("thumbnails/${System.currentTimeMillis()}.jpg")
+
+        thumbnailReference.putFile(thumbnailUri)
+            .addOnSuccessListener {
+                thumbnailReference.downloadUrl.addOnSuccessListener { uri ->
+                    onComplete(uri.toString())
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("ThumbnailUploadError", "Failed to upload thumbnail: ${e.message}")
+                onComplete("")
+            }
+    }
+
+    private fun generateThumbnail(pdfUri: Uri): Uri? {
+        return try {
+            val fileDescriptor = contentResolver.openFileDescriptor(pdfUri, "r")
+            val pdfRenderer = PdfRenderer(fileDescriptor!!)
+
+            // Open the first page of the PDF
+            val page = pdfRenderer.openPage(0)
+            val width = page.width
+            val height = page.height
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+
+            // Render the page to the bitmap
+            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+            page.close()
+            pdfRenderer.close()
+
+            // Save the bitmap to a file
+            val file = File(cacheDir, "thumbnail_${System.currentTimeMillis()}.jpg")
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.close()
+
+            Uri.fromFile(file)
+        } catch (e: Exception) {
+            Log.e("ThumbnailError", "Error generating thumbnail: ${e.message}")
+            null
+        }
+    }
+
 
     private fun Uri.getFileSize(contentResolver: ContentResolver): Long {
         return try {
@@ -119,7 +180,12 @@ class AddNewBook : AppCompatActivity() {
         }
     }
 
-    private fun uploadBook(fileUrl: String, fileSize: Long, uploadDate: String) {
+    private fun uploadBook(
+        fileUrl: String,
+        fileSize: Long,
+        uploadDate: String,
+        thumbnailUrl: String
+    ) {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
@@ -135,10 +201,9 @@ class AddNewBook : AppCompatActivity() {
                     "userId" to userId,
                     "fileUrl" to fileUrl,
                     "fileSize" to fileSize,
-                    "uploadDate" to uploadDate
+                    "uploadDate" to uploadDate,
+                    "thumbnailUrl" to thumbnailUrl  // Add this line
                 )
-
-                Log.d("BookUpload", "Uploading book with data: $bookData")
 
                 firestore.collection("books")
                     .add(bookData)
@@ -147,7 +212,11 @@ class AddNewBook : AppCompatActivity() {
                         clearFields()
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this, "Failed to upload book: ${e.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "Failed to upload book: ${e.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
             } else {
                 Toast.makeText(this, "All fields are required", Toast.LENGTH_LONG).show()
@@ -156,11 +225,6 @@ class AddNewBook : AppCompatActivity() {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_LONG).show()
         }
     }
-
-
-
-
-
 
     private fun clearFields() {
         editTextBookTitle.text?.clear()

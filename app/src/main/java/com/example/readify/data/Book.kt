@@ -7,5 +7,6 @@ data class Book(
     val userId: String = "",
     val fileUrl: String = "",
     val fileSize: Long = 0L, // Change from size to fileSize
-    val uploadDate: String = "" // Change from date to uploadDate
+    val uploadDate: String = "", // Change from date to uploadDate
+    val thumbnailUrl: String = ""
 )
