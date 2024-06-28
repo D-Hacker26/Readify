@@ -57,8 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <RelativeLayout
-                    android:id="@+id/pdfRlv"
+                <ImageView
+                    android:id="@+id/iv_thumbnail"
                     android:layout_width="110dp"
                     android:layout_height="150dp"
                     android:layout_marginEnd="5dp"
@@ -69,8 +69,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_toEndOf="@+id/pdfRlv"
-                    android:layout_toRightOf="@+id/pdfRlv"
+                    android:layout_toEndOf="@+id/iv_thumbnail"
+                    android:layout_toRightOf="@+id/iv_thumbnail"
                     android:text="Book Title"
                     android:textColor="@color/white"/>
 
@@ -78,8 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/titleTv"
-                    android:layout_toEndOf="@id/pdfRlv"
-                    android:layout_toRightOf="@id/pdfRlv">
+                    android:layout_toEndOf="@id/iv_thumbnail"
+                    android:layout_toRightOf="@id/iv_thumbnail">
 
                     <TableRow>
                         <TextView

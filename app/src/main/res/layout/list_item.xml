@@ -69,56 +69,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/txt_list_size"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:text="1000KB"
+                        android:textColor="#505760"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:gravity="start"/>
 
-                        <TextView
-                            android:id="@+id/txt_list_size"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="1000KB"
-                            android:textColor="#505760"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/txt_list_date"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:text="04/06/24"
+                        android:textColor="#505760"
+                        android:textSize="16sp"
+                        android:layout_weight="1"/>
 
-                        <TextView
-                            android:id="@+id/txt_list_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="04/06/24"
-                            android:textColor="#505760"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/txt_list_category"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:text="BTECH"
+                        android:textColor="#505760"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:gravity="end"/>
 
-                        <TextView
-                            android:id="@+id/txt_list_category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="BTECH"
-                            android:textColor="#505760"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
