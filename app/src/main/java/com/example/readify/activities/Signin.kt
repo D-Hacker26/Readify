@@ -11,30 +11,33 @@ import com.example.readify.extensions.Extensions.toast
 import com.example.readify.utils.FirebaseUtils.firebaseAuth
 
 class Signin : AppCompatActivity() {
-    lateinit var signInEmail: String
-    lateinit var signInPassword: String
-    lateinit var signInInputsArray: Array<AppCompatEditText>
-    lateinit var textViewForgotPassword: TextView
-    lateinit var editTextEmail: AppCompatEditText
-    lateinit var editTextPassword: AppCompatEditText
+    private lateinit var signInEmail: String
+    private lateinit var signInPassword: String
+    private lateinit var signInInputsArray: Array<AppCompatEditText>
+    private lateinit var textViewForgotPassword: TextView
+    private lateinit var editTextEmail: AppCompatEditText
+    private lateinit var editTextPassword: AppCompatEditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
+
         textViewForgotPassword = findViewById(R.id.txt_forgot_password)
         editTextEmail = findViewById(R.id.et_email)
         editTextPassword = findViewById(R.id.et_password)
         signInInputsArray = arrayOf(editTextEmail, editTextPassword)
 
-
         textViewForgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
         }
+
         val textViewSignup: TextView = findViewById(R.id.txt_sign_up)
         textViewSignup.setOnClickListener {
             val intent = Intent(this, Signup::class.java)
             startActivity(intent)
         }
+
         val buttonSignIn: AppCompatButton = findViewById(R.id.btn_sign_in)
         buttonSignIn.setOnClickListener {
             signInUser()
@@ -52,10 +55,10 @@ class Signin : AppCompatActivity() {
                 .addOnCompleteListener { signIn ->
                     if (signIn.isSuccessful) {
                         startActivity(Intent(this, Home::class.java))
-                        toast("signed in successfully")
+                        toast("Signed in successfully")
                         finish()
                     } else {
-                        toast("sign in failed")
+                        toast("Sign in failed")
                     }
                 }
         } else {
