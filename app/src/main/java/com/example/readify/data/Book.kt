@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Book(
+    var id: String = "",
     val title: String? = "",
     val description: String? = "",
     val category: String? = "",
@@ -12,5 +13,5 @@ data class Book(
     val fileUrl: String? = "",
     val fileSize: Long = 0L,
     val uploadDate: String? = "",
-    val thumbnailUrl: String? = ""
+    val thumbnailUrl: String? = "",
 ) : Parcelable

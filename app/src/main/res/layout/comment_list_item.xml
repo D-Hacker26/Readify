@@ -30,7 +30,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_username"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Deepanshu Gupta"
@@ -39,7 +39,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_timestamp"
+                android:id="@+id/comment_timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -50,11 +50,11 @@
 
         <!-- Comment Text -->
         <TextView
-            android:id="@+id/tv_comment_text"
+            android:id="@+id/comment_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Sure! I’ve made some slight tweaks, but for the most part it was spot on. @angusedwardson can you check?"
+            android:text=""
             android:textColor="#636C77"
             android:textSize="14sp" />
     </LinearLayout>

@@ -15,17 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Readify"
         tools:targetApi="31">
-        <activity
-            android:name=".CommentListItem"
-            android:exported="false" />
-        <activity
-            android:name=".CommentPopup"
-            android:exported="false" />
+
         <activity
             android:name=".activities.EditProfile"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ListItem"
             android:exported="false" />
         <activity
             android:name=".activities.Home"

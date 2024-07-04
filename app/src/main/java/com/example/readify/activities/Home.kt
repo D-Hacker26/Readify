@@ -70,6 +70,7 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
                     bookList.clear()
                     for (document in documents) {
                         val book = document.toObject(Book::class.java)
+                        book.id = document.id
                         Log.d("BookFetched", "Fetched book: $book")
                         bookList.add(book)
                     }
