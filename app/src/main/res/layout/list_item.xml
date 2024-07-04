@@ -29,7 +29,7 @@
                     android:id="@+id/img_list"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/goole_logo" />
+                    android:src="@drawable/baseline_insert_drive_file_24" />
 
             </LinearLayout>
 
