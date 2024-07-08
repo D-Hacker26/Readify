@@ -8,20 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.readify.R
-import com.example.readify.adapters.BookAdapter
+import com.example.readify.adapters.LikeAdapter
 import com.example.readify.data.Book
 import com.example.readify.extensions.Extensions.toast
 import com.example.readify.utils.FirebaseUtils.firebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class Profile : AppCompatActivity(), BookAdapter.OnItemClickListener {
+class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
 
     private lateinit var db: FirebaseFirestore
     private lateinit var textName: TextView
     private lateinit var textEmail: TextView
     private lateinit var textDate: TextView
     private lateinit var likedBooksRecyclerView: RecyclerView
-    private lateinit var bookAdapter: BookAdapter
+    private lateinit var bookAdapter: LikeAdapter
     private val likedBooksList = mutableListOf<Book>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class Profile : AppCompatActivity(), BookAdapter.OnItemClickListener {
                 }
             }
 
-            bookAdapter = BookAdapter(likedBooksList, this)
+            bookAdapter = LikeAdapter(likedBooksList, this)
             likedBooksRecyclerView.layoutManager = LinearLayoutManager(this)
             likedBooksRecyclerView.adapter = bookAdapter
 
