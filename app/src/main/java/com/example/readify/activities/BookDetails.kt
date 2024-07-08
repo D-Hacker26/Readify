@@ -95,6 +95,9 @@ class BookDetails : AppCompatActivity() {
             }
         }
 
+        buttonLike.setOnClickListener {
+            book?.let { likeBook(it) }
+        }
 
         val buttonBack: AppCompatImageView = findViewById(R.id.btn_back)
         buttonBack.setOnClickListener {
@@ -209,6 +212,22 @@ class BookDetails : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Failed to fetch comments: ${e.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    private fun likeBook(book: Book) {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            firestore.collection("users").document(currentUser.uid)
+                .collection("likedBooks")
+                .document(book.id)
+                .set(book)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Book liked", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Failed to like book: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+        }
     }
 
     override fun onResume() {
