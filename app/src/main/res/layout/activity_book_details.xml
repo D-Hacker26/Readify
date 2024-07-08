@@ -34,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="BOOK DETAILS"
+                android:text="@string/book_details"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -70,7 +70,6 @@
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_toEndOf="@+id/iv_thumbnail"
-                    android:layout_toRightOf="@+id/iv_thumbnail"
                     android:text="Book Title"
                     android:textColor="@color/white"/>
 
@@ -78,8 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/titleTv"
-                    android:layout_toEndOf="@id/iv_thumbnail"
-                    android:layout_toRightOf="@id/iv_thumbnail">
+                    android:layout_toEndOf="@id/iv_thumbnail">
 
                     <TableRow>
                         <TextView
@@ -87,7 +85,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/TextAppearance.MaterialComponents.Caption"
-                            android:text="Category"
+                            android:text="@string/category"
                             android:textColor="@color/white"
                             android:layout_marginEnd="5dp" />
 
@@ -97,7 +95,7 @@
                             style="@style/TextAppearance.MaterialComponents.Caption"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="N/A"
+                            android:text="@string/n_a"
                             android:textColor="@color/white"
                             android:layout_marginEnd="5dp" />
                     </TableRow>
@@ -108,7 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/TextAppearance.MaterialComponents.Caption"
-                            android:text="Date"
+                            android:text="@string/date"
                             android:textColor="@color/white"
                             android:layout_marginEnd="5dp" />
 

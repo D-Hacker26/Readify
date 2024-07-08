@@ -54,7 +54,7 @@ class BookAdapter(
         // Load the thumbnail using Glide
         Glide.with(holder.itemView.context)
             .load(book.thumbnailUrl)
-            .placeholder(R.drawable.goole_logo)  // Add a placeholder image
+            .placeholder(R.drawable.baseline_insert_drive_file_24)  // Add a placeholder image
             .into(holder.thumbnail)
 
         holder.bind(book, itemClickListener)

@@ -1,8 +1,12 @@
 package com.example.readify.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,8 +26,11 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
     private lateinit var textDate: TextView
     private lateinit var likedBooksRecyclerView: RecyclerView
     private lateinit var bookAdapter: LikeAdapter
+    private lateinit var progressBar: ProgressBar
+    private lateinit var profileContent: LinearLayout
     private val likedBooksList = mutableListOf<Book>()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -32,8 +39,17 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
         textEmail = findViewById(R.id.txt_email)
         textDate = findViewById(R.id.txt_date)
         likedBooksRecyclerView = findViewById(R.id.liked_books_recycler_view)
+        progressBar = findViewById(R.id.progress_bar)
+        profileContent = findViewById(R.id.profile_content)
 
         db = FirebaseFirestore.getInstance()
+
+        val buttonBack: ImageView = findViewById(R.id.iv_back)
+        buttonBack.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         val currentUser = firebaseAuth.currentUser
         currentUser?.let {
@@ -50,6 +66,9 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
                     }
                 }.addOnFailureListener { exception ->
                     toast("Failed to load user data: ${exception.message}")
+                }.addOnCompleteListener {
+                    progressBar.visibility = View.GONE
+                    profileContent.visibility = View.VISIBLE
                 }
             }
 

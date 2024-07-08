@@ -51,11 +51,21 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+    <ProgressBar
+        android:layout_marginTop="20dp"
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        />
     <LinearLayout
+        android:id="@+id/profile_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="150dp"
@@ -106,7 +116,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
                     <LinearLayout
                         android:gravity="center"
                         android:orientation="vertical"
@@ -213,13 +224,14 @@
                     android:textColor="@color/purple"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
+                    android:layout_margin="10dp"
                     android:textSize="16sp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/liked_books_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="5dp"
                     android:layout_margin="10dp"/>
 
             </LinearLayout>

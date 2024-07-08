@@ -25,6 +25,15 @@
     <string name="sighup">Sign Up</string>
     <string name="profile">PROFILE</string>
     <string name="back_arrow">back_arrow</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="_12sp">12sp</string>
+    <string name="don_t_have_an_account">DON\'T HAVE AN ACCOUNT ?</string>
+    <string name="signup">SIGNUP</string>
+    <string name="book_details">BOOK DETAILS</string>
+    <string name="category">Category</string>
+    <string name="n_a">N/A</string>
+    <string name="date">Date</string>
     <!--    <string name="default_web_client_id" />-->
     <string-array name="my_spinner_array">
         <item>Option 1</item>

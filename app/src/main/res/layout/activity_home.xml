@@ -76,7 +76,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_above="@+id/rel_lay"
-        android:layout_margin="2dp"/>
+        android:layout_margin="2dp"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/rel_lay"

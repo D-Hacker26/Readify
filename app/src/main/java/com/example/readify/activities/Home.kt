@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +24,8 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
     private lateinit var auth: FirebaseAuth
     private lateinit var recyclerView: RecyclerView
     private lateinit var bookAdapter: BookAdapter
+    private lateinit var progressBar: ProgressBar
+    private lateinit var linLay: LinearLayout
     private val bookList = mutableListOf<Book>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +36,8 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
         auth = FirebaseAuth.getInstance()
         recyclerView = findViewById(R.id.recycler_view_books)
 
+        progressBar = findViewById(R.id.progress_bar)
+        linLay = findViewById(R.id.lin_lay)
         bookAdapter = BookAdapter(bookList, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = bookAdapter
@@ -60,6 +67,10 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
     }
 
     private fun fetchBooks() {
+        progressBar.visibility = View.VISIBLE
+        recyclerView.visibility = View.GONE
+        linLay.visibility = View.GONE
+
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
@@ -75,11 +86,20 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
                         bookList.add(book)
                     }
                     bookAdapter.notifyDataSetChanged()
+                    progressBar.visibility = View.GONE
+                    if (bookList.isEmpty()) {
+                        linLay.visibility = View.VISIBLE
+                    } else {
+                        recyclerView.visibility = View.VISIBLE
+                    }
                 }
                 .addOnFailureListener { e ->
+                    progressBar.visibility = View.GONE
+                    recyclerView.visibility = View.VISIBLE
                     Toast.makeText(this, "Failed to fetch books: ${e.message}", Toast.LENGTH_LONG).show()
                 }
         } else {
+            progressBar.visibility = View.GONE
             Toast.makeText(this, "User not logged in", Toast.LENGTH_LONG).show()
         }
     }
