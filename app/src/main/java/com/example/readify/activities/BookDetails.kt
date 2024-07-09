@@ -16,6 +16,7 @@ import com.example.readify.data.Book
 import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -40,6 +41,9 @@ class BookDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)
+
+
+
         val title: TextView = findViewById(R.id.titleTv)
         val size: TextView = findViewById(R.id.sizeTv)
         val date: TextView = findViewById(R.id.date)
@@ -93,6 +97,12 @@ class BookDetails : AppCompatActivity() {
             } else {
                 requestPermission()
             }
+        }
+
+        val fromProfile = intent.getBooleanExtra("fromProfile", false)
+        // Conditionally hide the like button
+        if (fromProfile) {
+            buttonLike.visibility = View.GONE
         }
 
         buttonLike.setOnClickListener {

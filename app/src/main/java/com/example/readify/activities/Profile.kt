@@ -105,6 +105,7 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
     override fun onItemClick(book: Book) {
         val intent = Intent(this, BookDetails::class.java)
         intent.putExtra("book", book)
+        intent.putExtra("fromProfile", true)
         startActivity(intent)
     }
 }
