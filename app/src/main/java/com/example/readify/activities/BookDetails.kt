@@ -16,6 +16,7 @@ import com.example.readify.data.Book
 import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
@@ -28,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BookDetails : AppCompatActivity() {
+
     private var book: Book? = null
 
     private lateinit var auth: FirebaseAuth
@@ -41,7 +43,6 @@ class BookDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)
-
 
 
         val title: TextView = findViewById(R.id.titleTv)
@@ -91,6 +92,12 @@ class BookDetails : AppCompatActivity() {
         val buttonLike: Button = findViewById(R.id.btn_like)
         val buttonDownload: Button = findViewById(R.id.btn_download)
 
+        buttonRead.setOnClickListener {
+            book?.let { downloadAndDisplayPdf(it.fileUrl) }
+
+
+        }
+
         buttonDownload.setOnClickListener {
             if (checkPermission()) {
                 book?.let { downloadBook(it) }
@@ -114,6 +121,14 @@ class BookDetails : AppCompatActivity() {
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun downloadAndDisplayPdf(fileUrl: String?) {
+        if (fileUrl != null) {
+            val intent = Intent(this, PdfViewerActivity::class.java)
+            intent.putExtra("fileUrl", fileUrl)
+            startActivity(intent)
         }
     }
 

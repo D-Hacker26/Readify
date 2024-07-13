@@ -48,21 +48,21 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
         buttonProfile.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
-            finish()
+           // finish()
         }
 
         val buttonAddCategory: Button = findViewById(R.id.btn_add_category)
         buttonAddCategory.setOnClickListener {
             val intent = Intent(this, NewCategory::class.java)
             startActivity(intent)
-            finish()
+           // finish()
         }
 
         val buttonAddBook: Button = findViewById(R.id.btn_add_book)
         buttonAddBook.setOnClickListener {
             val intent = Intent(this, AddNewBook::class.java)
             startActivity(intent)
-            finish()
+           // finish()
         }
     }
 
