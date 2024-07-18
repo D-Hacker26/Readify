@@ -3,6 +3,7 @@ package com.example.readify.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +14,10 @@ import com.example.readify.extensions.Extensions.toast
 import com.example.readify.utils.FirebaseUtils.firebaseAuth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 class Signin : AppCompatActivity() {
@@ -26,8 +29,16 @@ class Signin : AppCompatActivity() {
     private lateinit var editTextPassword: AppCompatEditText
     private lateinit var toggleButtonRememberMe: ToggleButton
     private lateinit var sharedPreferences: SharedPreferences
-  //  private lateinit var googleSignInClient: GoogleSignInOptions
-    private val RC_SIGN_IN = 9001
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var mAuth: FirebaseAuth
+
+
+    companion object {
+        private const val RC_SIGN_IN = 9001
+        private const val TAG = "AUTH"
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
@@ -42,14 +53,30 @@ class Signin : AppCompatActivity() {
 
         // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken("27940962271-dfjq63k1ceh2b6s4ntoii5pptar1feir.apps.googleusercontent.com")
             .requestEmail()
             .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-     //   googleSignInClient = GoogleSignIn.getClient(this, gso)
+        mAuth = FirebaseAuth.getInstance()
 
         findViewById<TextView>(R.id.btn_login_google).setOnClickListener {
             signInWithGoogle()
+        }
+
+        if (isGoogleAccountSaved()) {
+            val googleAccountId = sharedPreferences.getString("googleAccountId", "")
+            val credential = GoogleAuthProvider.getCredential(googleAccountId, null)
+            firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        startActivity(Intent(this, Home::class.java))
+                        finish()
+                    } else {
+                        toast("Sign-in failed, try again later.")
+                        Log.d("Google sign in failed:",""+task.exception?.message)
+                    }
+                }
         }
 
 
@@ -97,9 +124,21 @@ class Signin : AppCompatActivity() {
         }
     }
 
+    private fun saveGoogleLoginState(account: GoogleSignInAccount) {
+        val editor = sharedPreferences.edit()
+        editor.putString("googleAccountId", account.id)
+        editor.apply()
+    }
+
+    private fun saveLoginState() {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isRemembered", toggleButtonRememberMe.isChecked)
+        editor.apply()
+    }
+
     private fun signInWithGoogle() {
-     //   val signInIntent = googleSignInClient.signInIntent
-     //   startActivityForResult(signInIntent, RC_SIGN_IN)
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -109,31 +148,40 @@ class Signin : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account)
+                if (account != null) {
+                    firebaseAuthWithGoogle(account)
+
+                }else{
+                    Log.w(TAG, "Account is NULL")
+                    toast("Sign-in failed, try again later.")
+                }
             } catch (e: ApiException) {
-                toast("Google sign in failed: ${e.message}")
+                toast("Google sign in failed")
+                Log.d("Google sign in failed:",""+e.message)
+
             }
         }
     }
 
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        Log.d(TAG, "firebaseAuthWithGoogle:${account.id}")
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    saveGoogleLoginState(account)
                     saveLoginState()
                     startActivity(Intent(this, Home::class.java))
                     toast("Signed in with Google successfully")
                     finish()
                 } else {
-                    toast("Google sign in failed")
+                    toast("Sign-in failed, try again later.")
+                    Log.d("Google sign in failed:",""+task.exception?.message)
                 }
             }
     }
 
-    private fun saveLoginState() {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isRemembered", toggleButtonRememberMe.isChecked)
-        editor.apply()
+    private fun isGoogleAccountSaved(): Boolean {
+        return sharedPreferences.getString("googleAccountId", "") != ""
     }
 }

@@ -34,6 +34,7 @@
     <string name="category">Category</string>
     <string name="n_a">N/A</string>
     <string name="date">Date</string>
+<!--    <string name="default_web_client_id">27940962271-dfjq63k1ceh2b6s4ntoii5pptar1feir.apps.googleusercontent.com</string>-->
     <!--    <string name="default_web_client_id" />-->
     <string-array name="my_spinner_array">
         <item>Option 1</item>

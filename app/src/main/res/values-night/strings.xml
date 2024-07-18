@@ -22,7 +22,8 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="sighup">Sign Up</string>
     <string name="profile">PROFILE</string>
-<!--
-    <string name="default_web_client_id" />
--->
+<!--    <string name="default_web_client_id">27940962271-dfjq63k1ceh2b6s4ntoii5pptar1feir.apps.googleusercontent.com</string>-->
+    <!--
+        <string name="default_web_client_id" />
+    -->
 </resources>

@@ -97,6 +97,7 @@ class Home : AppCompatActivity(), BookAdapter.OnItemClickListener {
                     progressBar.visibility = View.GONE
                     recyclerView.visibility = View.VISIBLE
                     Toast.makeText(this, "Failed to fetch books: ${e.message}", Toast.LENGTH_LONG).show()
+                    Log.d("Faileed", ""+e.message)
                 }
         } else {
             progressBar.visibility = View.GONE
