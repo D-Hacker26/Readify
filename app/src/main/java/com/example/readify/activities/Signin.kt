@@ -1,9 +1,12 @@
+// Signin.kt
 package com.example.readify.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
@@ -31,13 +34,12 @@ class Signin : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
-
+    private lateinit var btnTogglePasswordVisibility: ImageButton
 
     companion object {
         private const val RC_SIGN_IN = 9001
         private const val TAG = "AUTH"
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,11 @@ class Signin : AppCompatActivity() {
         textViewForgotPassword = findViewById(R.id.txt_forgot_password)
         editTextEmail = findViewById(R.id.et_email)
         editTextPassword = findViewById(R.id.et_password)
+        btnTogglePasswordVisibility = findViewById(R.id.btn_toggle_password_visibility)
+
+        btnTogglePasswordVisibility.setOnClickListener {
+            togglePasswordVisibility()
+        }
         toggleButtonRememberMe = findViewById(R.id.toggle_button_remember_me)
         signInInputsArray = arrayOf(editTextEmail, editTextPassword)
 
@@ -79,7 +86,6 @@ class Signin : AppCompatActivity() {
                 }
         }
 
-
         textViewForgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
@@ -95,6 +101,17 @@ class Signin : AppCompatActivity() {
         buttonSignIn.setOnClickListener {
             signInUser()
         }
+    }
+
+    private fun togglePasswordVisibility() {
+        if (editTextPassword.inputType == (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            editTextPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            btnTogglePasswordVisibility.setImageResource(R.drawable.ic_visibility_on)
+        } else {
+            editTextPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            btnTogglePasswordVisibility.setImageResource(R.drawable.ic_visibility_off)
+        }
+        editTextPassword.text?.let { editTextPassword.setSelection(it.length) } // Move cursor to end
     }
 
     private fun notEmpty(): Boolean = signInEmail.isNotEmpty() && signInPassword.isNotEmpty()
@@ -150,15 +167,13 @@ class Signin : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 if (account != null) {
                     firebaseAuthWithGoogle(account)
-
-                }else{
+                } else {
                     Log.w(TAG, "Account is NULL")
                     toast("Sign-in failed, try again later.")
                 }
             } catch (e: ApiException) {
                 toast("Google sign in failed")
                 Log.d("Google sign in failed:",""+e.message)
-
             }
         }
     }

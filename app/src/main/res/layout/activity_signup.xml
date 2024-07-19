@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sighup"
+        android:text="Sigh up"
         android:textSize="32sp"
         android:textStyle="bold"
         android:layout_marginTop="40dp"
@@ -24,83 +24,127 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_full_name"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:drawableStart="@drawable/baseline_person_24"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/full_name"
-        android:textColorHint="#505760"
-        android:textColor="#505760"
-        android:padding="10dp"
-        />
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_email"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/rounded_edittext"
-        android:drawableStart="@drawable/email_24"
-        android:hint="@string/abc_gmail_com"
-        android:textColorHint="#505760"
-        android:textColor="#505760"
-        android:padding="10dp"
-        />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_full_name"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/baseline_person_24"
+            android:background="@drawable/rounded_edittext"
+            android:hint=" Full Name"
+            android:textColorHint="#505760"
+            android:textColor="#505760"
+            android:padding="10dp"
+            />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_password"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:drawableStart="@drawable/baseline_lock_24"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/your_password1"
-        android:textColorHint="#505760"
-        android:textColor="#505760"
-        android:padding="10dp"
-        />
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="28dp"
-        android:textColor="#505760"
-        android:drawableStart="@drawable/baseline_lock_24"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/confirm_password"
-        android:textColorHint="#505760"
-        android:padding="10dp"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
-        android:background="@color/purple"
-        android:text="@string/sign_up"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="16sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OR"
-        android:textColor="@color/white"
-        android:layout_marginTop="28dp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:layout_marginBottom="28dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/email_24"
+            android:hint=" abc@gmail.com"
+            android:textColorHint="#505760"
+            android:textColor="#505760"
+            android:padding="10dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edittext"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_password"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:background="@drawable/rounded_edittext"
+                android:hint=" Your Password"
+                android:textColorHint="#505760"
+                android:textColor="#505760"
+                android:padding="10dp"
+                android:inputType="textPassword"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_toggle_password_visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_visibility_off"
+                android:padding="10dp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_edittext"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:background="@drawable/rounded_edittext"
+                android:hint=" Confirm Password"
+                android:textColorHint="#505760"
+                android:textColor="#505760"
+                android:padding="10dp"
+                android:inputType="textPassword"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_toggle_confirm_password_visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_visibility_off"
+                android:padding="10dp"
+
+                />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:background="@color/purple"
+            android:text="@string/sign_up"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textColor="@color/white"
+            android:layout_marginTop="28dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_marginBottom="28dp"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -117,13 +161,13 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:drawableStart="@drawable/goole_logo"
-
                 android:gravity="center_vertical"
                 android:text="  LOGIN WITH GOOGLE"
                 android:textColor="@color/white"
                 android:textSize="16dp" />
 
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

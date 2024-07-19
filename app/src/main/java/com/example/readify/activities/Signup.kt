@@ -2,9 +2,11 @@ package com.example.readify.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.readify.R
@@ -24,25 +26,35 @@ class Signup : AppCompatActivity() {
     private lateinit var editTextConfirmPassword: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var editTextFullName: EditText
+    private lateinit var btnTogglePasswordVisibility: ImageButton
+    private lateinit var btnToggleConfirmPasswordVisibility: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        val buttonSignUp: Button = findViewById(R.id.btn_sign_up)
         editTextFullName = findViewById(R.id.et_full_name)
         editTextPassword = findViewById(R.id.et_password)
         editTextConfirmPassword = findViewById(R.id.et_confirm_password)
         editTextEmail = findViewById(R.id.et_email)
-        createAccountInputsArray =
-            arrayOf(editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName)
+        btnTogglePasswordVisibility = findViewById(R.id.btn_toggle_password_visibility)
+        btnToggleConfirmPasswordVisibility = findViewById(R.id.btn_toggle_confirm_password_visibility)
 
-        buttonSignUp.setOnClickListener {
+        createAccountInputsArray = arrayOf(editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName)
+
+        btnTogglePasswordVisibility.setOnClickListener {
+            togglePasswordVisibility(editTextPassword, btnTogglePasswordVisibility)
+        }
+
+        btnToggleConfirmPasswordVisibility.setOnClickListener {
+            togglePasswordVisibility(editTextConfirmPassword, btnToggleConfirmPasswordVisibility)
+        }
+
+        findViewById<Button>(R.id.btn_sign_up).setOnClickListener {
             signIn()
         }
 
-        val textViewSignIn: TextView = findViewById(R.id.txt_sign_in)
-        textViewSignIn.setOnClickListener {
+        findViewById<TextView>(R.id.txt_sign_in).setOnClickListener {
             val intent = Intent(this, Signin::class.java)
             startActivity(intent)
         }
@@ -134,5 +146,16 @@ class Signup : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun togglePasswordVisibility(editText: EditText, toggleButton: ImageButton) {
+        if (editText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            toggleButton.setImageResource(R.drawable.ic_visibility_off)
+        } else {
+            editText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            toggleButton.setImageResource(R.drawable.ic_visibility_on)
+        }
+        editText.setSelection(editText.text.length)
     }
 }
