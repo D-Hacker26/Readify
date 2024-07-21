@@ -15,6 +15,8 @@ import com.example.readify.R
 import com.example.readify.data.Book
 import android.Manifest
 import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.util.Log
 import android.view.View
@@ -38,6 +40,9 @@ class BookDetails : AppCompatActivity() {
     private val commentList = mutableListOf<Comment>()
     private lateinit var commentRecyclerView: RecyclerView
     private lateinit var addCommentButton: ImageButton
+    private var downloadId: Long = 0
+    private lateinit var downloadCompleteReceiver: DownloadCompleteReceiver
+
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +67,7 @@ class BookDetails : AppCompatActivity() {
         commentRecyclerView.adapter = commentAdapter
 
         addCommentButton.setOnClickListener {
-          //  addComment()
+            //  addComment()
             showAddCommentDialog()
         }
 
@@ -156,22 +161,28 @@ class BookDetails : AppCompatActivity() {
     }
 
     private fun downloadBook(book: Book) {
-        val request = DownloadManager.Request(Uri.parse(book.fileUrl))  // Assuming `pdfUrl` is a property of Book
-            .setTitle(book.title)
-            .setDescription("Downloading ${book.title}")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "${book.title}.pdf")
-            .setAllowedOverMetered(true)
-            .setAllowedOverRoaming(true)
+        val request =
+            DownloadManager.Request(Uri.parse(book.fileUrl))  // Assuming `pdfUrl` is a property of Book
+                .setTitle(book.title)
+                .setDescription("Downloading ${book.title}")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    "${book.title}.pdf"
+                )
+                .setAllowedOverMetered(true)
+                .setAllowedOverRoaming(true)
 
         val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         downloadManager.enqueue(request)
+
+        downloadId = downloadManager.enqueue(request)
     }
 
 
-
     private fun checkPermission(): Boolean {
-        val permission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permission =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         return permission == PackageManager.PERMISSION_GRANTED
     }
 
@@ -183,7 +194,11 @@ class BookDetails : AppCompatActivity() {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // Permission granted
@@ -197,7 +212,7 @@ class BookDetails : AppCompatActivity() {
     private fun addComment(commentText: String) {
 
         val currentUser = auth.currentUser
-       // val commentText = commentEditText.text.toString()
+        // val commentText = commentEditText.text.toString()
 
         if (currentUser != null && commentText.isNotEmpty()) {
             val comment = Comment(
@@ -215,7 +230,11 @@ class BookDetails : AppCompatActivity() {
                         commentAdapter.notifyDataSetChanged()
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this, "Failed to add comment: ${e.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "Failed to add comment: ${e.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
             }
         }
@@ -235,7 +254,8 @@ class BookDetails : AppCompatActivity() {
                 commentAdapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to fetch comments: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Failed to fetch comments: ${e.message}", Toast.LENGTH_LONG)
+                    .show()
             }
     }
 
@@ -250,14 +270,43 @@ class BookDetails : AppCompatActivity() {
                     Toast.makeText(this, "Book liked", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Failed to like book: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Failed to like book: ${e.message}", Toast.LENGTH_LONG)
+                        .show()
                 }
         }
     }
 
     override fun onResume() {
         super.onResume()
+        downloadCompleteReceiver = DownloadCompleteReceiver()
+        registerReceiver(downloadCompleteReceiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         book?.let { fetchComments(it) }
     }
 
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(downloadCompleteReceiver)
+    }
+
+}
+
+
+class DownloadCompleteReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        val action = intent.action
+        if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {
+            val downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0)
+            val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            val query = DownloadManager.Query().setFilterById(downloadId)
+            val cursor = downloadManager.query(query)
+            if (cursor.moveToFirst()) {
+                val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+                if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                    Toast.makeText(context, "Download complete", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Download failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }
