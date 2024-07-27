@@ -35,11 +35,11 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
     private lateinit var bookAdapter: LikeAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var profileContent: LinearLayout
+    private lateinit var profilePicUploadProgress: ProgressBar
     private val likedBooksList = mutableListOf<Book>()
 
     private val PICK_IMAGE_REQUEST = 71
     private lateinit var storageReference: StorageReference
-
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +53,10 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
         likedBooksRecyclerView = findViewById(R.id.liked_books_recycler_view)
         progressBar = findViewById(R.id.progress_bar)
         profileContent = findViewById(R.id.profile_content)
+        profilePicUploadProgress = findViewById(R.id.profile_pic_upload_progress)
 
         db = FirebaseFirestore.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
-
 
         val buttonBack: ImageView = findViewById(R.id.iv_back)
         buttonBack.setOnClickListener {
@@ -65,7 +65,7 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
             finish()
         }
 
-        ivProfilePic.setOnClickListener{
+        ivProfilePic.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
@@ -140,13 +140,16 @@ class Profile : AppCompatActivity(), LikeAdapter.OnItemClickListener {
 
     private fun uploadProfilePicture(uri: Uri, userId: String) {
         val profilePicRef = storageReference.child("profile_pics/$userId.jpg")
+        profilePicUploadProgress.visibility = View.VISIBLE  // Show loader
         profilePicRef.putFile(uri).addOnSuccessListener {
             profilePicRef.downloadUrl.addOnSuccessListener { downloadUri ->
                 Glide.with(this).load(downloadUri).into(ivProfilePic)
                 toast("Profile picture updated successfully")
+                profilePicUploadProgress.visibility = View.GONE  // Hide loader
             }
         }.addOnFailureListener {
             toast("Failed to upload profile picture")
+            profilePicUploadProgress.visibility = View.GONE  // Hide loader
         }
     }
 

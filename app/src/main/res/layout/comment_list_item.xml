@@ -30,6 +30,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:id="@+id/comment_timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text=""
+            android:fontFamily="@font/poppins_regular"
             android:textColor="#636C77"
             android:textSize="14sp" />
     </LinearLayout>

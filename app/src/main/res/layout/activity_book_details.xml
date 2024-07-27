@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/book_details"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </RelativeLayout>
@@ -65,6 +66,7 @@
                     android:background="@color/white" />
 
                 <TextView
+                    android:fontFamily="@font/poppins_regular"
                     android:id="@+id/titleTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -81,6 +83,7 @@
 
                     <TableRow>
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/category_labelTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -90,6 +93,7 @@
                             android:layout_marginEnd="5dp" />
 
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/categoryTv"
                             android:layout_weight="1"
                             style="@style/TextAppearance.MaterialComponents.Caption"
@@ -102,6 +106,7 @@
 
                     <TableRow android:layout_marginTop="5dp">
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/date_labelTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -111,6 +116,7 @@
                             android:layout_marginEnd="5dp" />
 
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/date"
                             android:textColor="@color/white"
                             android:layout_weight="1"
@@ -123,6 +129,7 @@
 
                     <TableRow android:layout_marginTop="5dp">
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/size_labelTv"
                             android:textColor="@color/white"
                             android:layout_width="wrap_content"
@@ -132,6 +139,7 @@
                             android:layout_marginEnd="5dp" />
 
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/sizeTv"
                             android:textColor="@color/white"
                             android:layout_weight="1"
@@ -144,6 +152,7 @@
 
                     <TableRow android:layout_marginTop="5dp">
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/Views_labelTv"
                             android:textColor="@color/white"
                             android:layout_width="wrap_content"
@@ -153,6 +162,7 @@
                             android:layout_marginEnd="5dp" />
 
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/viewsTv"
                             android:textColor="@color/white"
                             android:layout_weight="1"
@@ -165,6 +175,7 @@
 
                     <TableRow android:layout_marginTop="5dp">
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/download_labelTv"
                             android:textColor="@color/white"
                             android:layout_width="wrap_content"
@@ -174,6 +185,7 @@
                             android:layout_marginEnd="5dp" />
 
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/downloadTv"
                             android:textColor="@color/white"
                             android:layout_weight="1"
@@ -186,6 +198,7 @@
 
                     <TableRow android:layout_marginTop="5dp">
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/page_labelTv"
                             android:textColor="@color/white"
                             android:layout_width="wrap_content"
@@ -195,6 +208,7 @@
                             android:layout_marginEnd="5dp" />
 
                         <TextView
+                            android:fontFamily="@font/poppins_regular"
                             android:id="@+id/pagesTv"
                             android:textColor="@color/white"
                             android:layout_weight="1"
@@ -223,12 +237,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="start"
                 android:text="Comments"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/ib_click_comment"
@@ -256,6 +274,7 @@
 
 
     <Button
+        android:fontFamily="@font/poppins_regular"
         android:id="@+id/btn_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -267,6 +286,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:fontFamily="@font/poppins_regular"
         android:id="@+id/btn_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -279,6 +299,7 @@
         app:layout_constraintStart_toEndOf="@+id/btn_read" />
 
     <Button
+        android:fontFamily="@font/poppins_regular"
         android:id="@+id/btn_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

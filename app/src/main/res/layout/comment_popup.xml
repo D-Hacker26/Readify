@@ -23,6 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:text="Add Comment"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -50,6 +51,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:hint="Comment"
+            android:fontFamily="@font/poppins_regular"
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="#A6A6A6" />

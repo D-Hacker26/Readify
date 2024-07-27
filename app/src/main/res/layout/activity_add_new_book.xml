@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_new_book"
-
+        android:fontFamily="@font/poppins_regular"
         android:textSize="32sp"
         android:textStyle="bold"
         android:layout_marginStart="30dp"
@@ -32,6 +32,7 @@
         android:orientation="vertical">
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_book_title"
+            android:fontFamily="@font/poppins_regular"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -45,6 +46,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_book_description"
+            android:fontFamily="@font/poppins_regular"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_gravity="center"
@@ -69,6 +71,8 @@
         <Spinner
             android:id="@+id/my_spinner"
             android:padding="10dp"
+            android:fontFamily="@font/poppins_regular"
+
             android:background="#1F1F23"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -89,6 +93,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="@color/white"
             android:text="Uploade file will be shown here"
             android:layout_margin="10dp"/>
@@ -99,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:text="Browse File"
                 android:gravity="center"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:padding="10dp"
                 android:textAllCaps="false"
@@ -117,6 +123,7 @@
             android:layout_margin="10dp"
             android:background="@color/purple"
             android:text="@string/upload"
+            android:fontFamily="@font/poppins_regular"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="16sp"/>

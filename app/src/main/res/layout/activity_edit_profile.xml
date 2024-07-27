@@ -4,17 +4,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EDIT PROFILE"
+        android:textSize="24dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
 
     <EditText
+        android:fontFamily="@font/poppins_regular"
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:textColor="@color/b"
         android:hint="Name"
+        android:paddingStart="10dp"
         android:layout_margin="5dp"/>
 
     <EditText
+        android:fontFamily="@font/poppins_regular"
         android:id="@+id/et_email"
         android:background="@color/white"
         android:layout_width="match_parent"
@@ -22,9 +34,11 @@
         android:textColor="@color/b"
         android:layout_margin="5dp"
         android:hint="Email"
+        android:paddingStart="10dp"
         android:inputType="textEmailAddress" />
 
     <Button
+        android:fontFamily="@font/poppins_regular"
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

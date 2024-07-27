@@ -41,14 +41,15 @@ class BookAdapter(
     }
 
     @SuppressLint("SetTextI18n")
+
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = books[position]
-        holder.title.text = book.title
-        holder.description.text = book.description
-        holder.category.text = book.category
+        holder.title.text = book.title?.capitalizeFirstLetter()         // Change here
+        holder.description.text = book.description?.capitalizeFirstLetter() // Change here
+        holder.category.text = book.category?.capitalizeFirstLetter()   // Change here
         holder.size.text = "${book.fileSize / 1024} KB"
         Log.d("BookSize", "Binding book size: ${holder.size.text}")
-        holder.date.text = book.uploadDate
+        holder.date.text = book.uploadDate?.capitalizeFirstLetter()     // Change here
         Log.d("BookDate", "Binding book date: ${holder.date.text}")
 
         // Load the thumbnail using Glide
@@ -60,5 +61,9 @@ class BookAdapter(
         holder.bind(book, itemClickListener)
     }
 
+
     override fun getItemCount() = books.size
+    private fun String.capitalizeFirstLetter(): String {
+        return this.lowercase().replaceFirstChar { it.uppercase() }
+    }
 }

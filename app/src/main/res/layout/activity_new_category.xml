@@ -30,6 +30,7 @@
         android:text="@string/add_new_category"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="30dp"
 
         android:textColor="@color/white"/>
@@ -47,6 +48,7 @@
         android:background="#1F1F23"
         android:hint="@string/category_title"
         android:textColor="#505760"
+        android:fontFamily="@font/poppins_regular"
         android:textColorHint="#505760"
         android:paddingStart="10dp"
         tools:ignore="RtlSymmetry" />
@@ -59,6 +61,7 @@
         android:layout_margin="10dp"
         android:background="@color/purple"
         android:text="@string/submit"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16sp"/>

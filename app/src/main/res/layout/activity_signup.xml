@@ -33,9 +33,10 @@
             android:drawableStart="@drawable/baseline_person_24"
             android:background="@drawable/rounded_edittext"
             android:hint=" Full Name"
+            android:fontFamily="@font/poppins_regular"
             android:textColorHint="#505760"
             android:textColor="#505760"
-            android:padding="10dp"
+            android:paddingStart="10dp"
             />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -47,9 +48,10 @@
             android:background="@drawable/rounded_edittext"
             android:drawableStart="@drawable/email_24"
             android:hint=" abc@gmail.com"
+            android:fontFamily="@font/poppins_regular"
             android:textColorHint="#505760"
             android:textColor="#505760"
-            android:padding="10dp"
+            android:paddingStart="10dp"
             />
 
         <LinearLayout
@@ -69,9 +71,10 @@
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:background="@drawable/rounded_edittext"
                 android:hint=" Your Password"
+                android:fontFamily="@font/poppins_regular"
                 android:textColorHint="#505760"
                 android:textColor="#505760"
-                android:padding="10dp"
+                android:paddingStart="10dp"
                 android:inputType="textPassword"
                 />
 
@@ -105,7 +108,8 @@
                 android:hint=" Confirm Password"
                 android:textColorHint="#505760"
                 android:textColor="#505760"
-                android:padding="10dp"
+                android:paddingStart="10dp"
+                android:fontFamily="@font/poppins_regular"
                 android:inputType="textPassword"
                 />
 
@@ -128,6 +132,7 @@
             android:layout_marginTop="28dp"
             android:background="@color/purple"
             android:text="@string/sign_up"
+            android:fontFamily="@font/poppins_regular"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:textColor="@color/white"
@@ -143,6 +148,7 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textSize="20sp"
+            android:fontFamily="@font/poppins_regular"
             android:layout_marginBottom="28dp"/>
 
         <RelativeLayout
@@ -163,6 +169,7 @@
                 android:drawableStart="@drawable/goole_logo"
                 android:gravity="center_vertical"
                 android:text="  LOGIN WITH GOOGLE"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:textSize="16dp" />
 
@@ -179,7 +186,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+
                 android:text="ALREADY HAVE AN ACCOUNT ? "
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:textSize="16dp" />
 
@@ -189,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="SIGNIN"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/purple"
                 android:textSize="16dp" />
         </LinearLayout>
